@@ -1,0 +1,5 @@
+/*this is for the strikethrough feature */
+
+.completed{
+    text-decoration: line-through;
+}

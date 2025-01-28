@@ -1,0 +1,80 @@
+﻿@page "/"
+
+<PageTitle>ToDos</PageTitle>
+
+<h3>Todos</h3>
+
+@if(tf.Get() is not null)
+{
+    <div class="input-group w-25 mb-3">
+        <input type="text" @bind="desc" class="form-control" placeholder="Enter a to-do description" />
+        <button class="btn btn-outline-success" @onclick="Add">Add</button>
+    </div>
+
+    @if(error.Length>0)
+    {
+        <div class="alert alert-danger alert-dismissible w-25 mb-3">
+            <strong>Error!</strong> @error
+            <button type="button" class="btn-close" @onclick="HideError"></button>
+
+        </div>
+    }
+    <ul class="list-group w-25 mb-3">
+    @foreach (var todop in tf.Get())
+    {
+        <li class="list-group-item d-flex align-items-center justify-content-between">
+            <div>
+                <input id="@todop.Id" type="checkbox" @onchange="@(e => Update(e.Value.ToBool(), todop))" class="form-check-input" checked="@todop.Completed"/>
+                <label for="@todop.Id" class="form-check-label @(todop.Completed ?"completed" : "" )">@todop.Description</label>
+            </div>
+            <input type="button" value="delete" class="btn btn-sm btn-outline-danger" @onclick="@(e => Delete(todop))" />
+        </li> 
+    }
+    
+</ul>
+}
+
+
+@code{
+    string desc = string.Empty;
+    string error = string.Empty;
+
+    //create an instance of the todo factory
+    TodoFactory tf= new ();
+
+    List<Todo> todos = new() {new Todo{Id=1, Completed=true, Description="first task"}};
+    // with the help of razor we can add c# to our html
+
+    void HideError()=> error = string.Empty;
+    void Update(bool completed, Todo todop) 
+    {
+        HideError();
+        if(!tf.Update(completed, todop))
+        {
+            error = "couldnt update the todo";
+        }
+    }
+
+    void Delete(Todo todop) 
+    {
+        HideError();
+        tf.Delete(todop);
+    }
+
+    void Add()
+    {
+        try
+        {
+            HideError();
+            tf.Add(desc);
+            desc=string.Empty;
+
+        }
+        catch (ArgumentException ex)
+        {
+            error = ex.Message;
+        }
+
+        catch { error = "stop man, couldnt add"; }
+    }
+}    
