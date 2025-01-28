@@ -1,15 +1,3 @@
-Todo application created using ASP .net webassembly, C#, razor and HTML.
+## Todo application
 
-Build a user interface with HTML, Razor, and Bootstrap
-
-Add C# code to make it dynamic.
-
-Refactor the application with object-oriented programming, separation of concerns, and encapsulation
-
-Use extension methods to make the code less bloated
-
-Connect Razor events in the HTML with C# in a code block
-
-Add exception handling and debug your code
-
-Create a GitHub repository and send your code to it
+The Todo application was created using ASP.NET WebAssembly, C#, Razor, and HTML. The user interface was built with HTML, Razor, and Bootstrap, while dynamic functionality was implemented using C#. The application was refactored to follow object-oriented programming principles, incorporating separation of concerns and encapsulation. Extension methods were utilized to simplify the code and reduce bloat. Razor events in the HTML were seamlessly connected with C# code blocks to enhance interactivity. Exception handling was added, and the code was thoroughly debugged to ensure reliability. Finally, a GitHub repository was created, and the code was pushed for version control and collaboration.
